@@ -12,4 +12,17 @@ router.post('/login', function(req, res, next) { // method == 'GET'
   })
 });
 
+// 测试 session
+router.get('/session-test',(req, res, next) => {
+  const session = req.session
+  if(session.viewNum == null){
+    session.viewNum = 0
+  }
+  session.viewNum++
+
+  res.json({
+    viewNum: session.viewNum
+  })
+})
+
 module.exports = router;
