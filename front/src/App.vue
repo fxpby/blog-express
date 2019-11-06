@@ -1,23 +1,47 @@
 <template>
-  <div id="app">
-    
-    <router-view/>
+  <div class="app">
+    <!-- <h5>{{ msg }}</h5>
+    <p>{{datahh}}</p> -->
+    _____________________________________
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
-}
+  name: "App",
+  data() {
+    return {
+      msg: "数据传过来了嘛 app???",
+      datahh: []
+    };
+  },
+  mounted() {
+    // 获取网络数据
+    // this.axios
+    //   .get("http://localhost:3000/api/blog/list")
+    //   .then(response => {
+    //     if (response.status === 200) {
+    //       console.log(response);
+    //     }
+    //     this.datahh = response.data.data;
+    //     // this.axios({
+    //     //   url: "http://www.baidu.com",
+    //     //   method: "get"
+    //     // }).then(res => {
+    //     //   console.log(res);
+    //     // });
+
+    //   })
+    //   .catch(error => {
+    //     alert("网络出现异常!");
+    //   });
+  },
+  methods: {}
+};
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+
 </style>
