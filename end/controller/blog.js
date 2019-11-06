@@ -1,17 +1,17 @@
 const { exec,escape } = require('../db/mysql')
 const xss = require('xss')
 const getList = (author, keyword) => {
-    author = escape(author)
+    // author = escape(author)
     // keyword = escape(keyword)
     let sql = `select * from blogs where 1=1 `
     if(author){
-        sql += `and author=${author} `
+        sql += `and author='${author}' `
     }
     if(keyword){
         sql += `and title like '%${keyword}%' `
     }
     sql += `order by createtime desc`
-
+    console.log(sql)
     // 返回 promise
     return exec(sql)
 }

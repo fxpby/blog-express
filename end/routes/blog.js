@@ -7,6 +7,7 @@ const {
   updateBlog,
   delBlog 
 } = require('../controller/blog')
+const { SuccessModel, ErrorModel } = require('../model/resModel')
 
 /* GET home page. */
 router.get('/list', function (req, res, next) { // method == 'GET'

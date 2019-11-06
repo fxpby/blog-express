@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan'); // 记录日志
-
+const cors = require('cors')
 
 // 引用路由
 // var indexRouter = require('./routes/index');
@@ -14,6 +14,10 @@ const userRouter = require('./routes/user');
 
 var app = express();
 
+app.use(cors({  
+  origin:['http://localhost:8080'],
+  methods:['GET','POST'],
+}));
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'jade');
