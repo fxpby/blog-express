@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan'); // 记录日志
 const cors = require('cors')
+const session = require('express-session')
 
 // 引用路由
 // var indexRouter = require('./routes/index');
@@ -27,6 +28,15 @@ app.use(express.json()); // content-type =='application/json'
 app.use(express.urlencoded({ extended: false })); // 兼容其他格式
 app.use(cookieParser());  // 解析 cookie
 // app.use(express.static(path.join(__dirname, 'public'))); // 设置静态文件
+
+app.use(session({
+  secret: 'WyT_5875#', // 密匙
+  cookie: {
+    // path: '/',  // 默认配置
+    // httpOnly: true, // 默认配置
+    maxAge: 24 * 60 * 60 * 1000 // 24 小时后失效
+  }
+}))
 
 // 注册路由
 // app.use('/', indexRouter);
