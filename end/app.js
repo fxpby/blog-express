@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var fs = require('fs')
 var cookieParser = require('cookie-parser');
 var logger = require('morgan'); // 记录日志
 const cors = require('cors')
@@ -26,7 +27,22 @@ var app = express();
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'jade');
 
-app.use(logger('dev'));
+const ENV = process.env.NODE_ENV
+if( ENV !== 'production'){
+  // 开发 / 测试 环境
+  app.use(logger('dev'));
+}else{
+  // 线上环境
+  const logFileName = path.join(__dirname, 'logs', 'access.log')
+  const writeStream = fs.createWriteStream(logFileName, {
+    flags: 'a'
+  })
+  app.use(logger('combined', {
+    stream: writeStream
+  }));
+}
+// app.use(logger('dev'));
+
 app.use(express.json()); // content-type =='application/json'
 app.use(express.urlencoded({ extended: false })); // 兼容其他格式
 app.use(cookieParser());  // 解析 cookie
