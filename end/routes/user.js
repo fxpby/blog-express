@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const { login } = require('../controller/user')
+const { login,reg } = require('../controller/user')
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 
-router.post('/login', function (req, res, next) { // method == 'GET'
+router.post('/login', (req, res, next) => { // method == 'GET'
   const { username, password } = req.body
   const result = login(username, password)
   return result.then(data => {
@@ -22,6 +22,19 @@ router.post('/login', function (req, res, next) { // method == 'GET'
     )
   })
 });
+
+router.post('/reg', (req, res, next) => {
+  const username = req.body.username
+  const password = req.body.password
+  const realname = req.body.realname
+  const result = reg(username, password, realname)
+  return result.then(data => {
+    res.json(
+      new SuccessModel(data)
+    )
+  })
+
+})
 
 // router.get('/login-test',(req, res, next) => {
 //   if(req.session.username){
